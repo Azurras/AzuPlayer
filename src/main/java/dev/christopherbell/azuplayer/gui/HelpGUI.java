@@ -6,22 +6,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class HelpGUI {
-	JFrame frame;
-	JTextArea helpMessage;
-	JPanel panel;
-	JScrollPane scroller;
-
 	public HelpGUI() {
-		frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setTitle("Bell Help");
 		frame.setBounds(0, 223, 250, 200);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.getContentPane();
-		
-		helpMessage = new JTextArea(5, 20);
-		panel = new JPanel(null);
-		scroller = new JScrollPane(helpMessage);
+
+		JTextArea helpMessage = new JTextArea(5, 20);
+		JPanel panel = new JPanel(null);
+		JScrollPane scroller = new JScrollPane(helpMessage);
 		
 		frame.add(panel);
 		panel.add(scroller);

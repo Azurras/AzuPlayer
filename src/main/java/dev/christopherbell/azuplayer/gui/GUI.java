@@ -18,20 +18,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUI {
-    JFrame mainFrame;
-    Container pane;
-    DefaultTableModel mTableSong;
-    JScrollPane sTableSong;
-    JPanel panelSong;
-    JPanel panelButtonArea;
-    JTable tableSong;
-    JButton play;
-    JButton pause;
-
-    Song song;
-    String musicFolderPath;
-    boolean isSongPlaying;
-
+    private final DefaultTableModel mTableSong;
+    private final JTable tableSong;
+    private final Song song;
+    private boolean isSongPlaying;
 
     public GUI(String pathOfMusicFolder) {
         try {
@@ -40,9 +30,9 @@ public class GUI {
             e.printStackTrace();
         }
 
-        mainFrame = new JFrame("BellPlayer");
+        JFrame mainFrame = new JFrame("BellPlayer");
         mainFrame.setBounds(250, 0, 750, 450);
-        pane = mainFrame.getContentPane();
+        Container pane = mainFrame.getContentPane();
         pane.setLayout(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -53,11 +43,11 @@ public class GUI {
         };
 
         tableSong = new JTable(mTableSong);
-        sTableSong = new JScrollPane(tableSong);
-        panelSong = new JPanel(null);
-        panelButtonArea = new JPanel(null);
-        play = new JButton("Play");
-        pause = new JButton("Pause");
+        JScrollPane sTableSong = new JScrollPane(tableSong);
+        JPanel panelSong = new JPanel(null);
+        JPanel panelButtonArea = new JPanel(null);
+        JButton play = new JButton("Play");
+        JButton pause = new JButton("Pause");
 
 
         pane.add(panelButtonArea);

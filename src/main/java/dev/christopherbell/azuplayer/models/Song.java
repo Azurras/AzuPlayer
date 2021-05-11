@@ -9,16 +9,16 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Song {
-	String musicFolderPath;
-	String songPath;
-	int numberOfSongs;
-	File songToPlay;
-	File[] listOfFiles;
-	Player p;
+	private final String musicFolderPath;
+	private String songPath;
+	private int numberOfSongs;
+	private File songToPlay;
+	private File[] listOfFiles;
+	private Player player;
 	
 	public Song(String pathOfMusicFolder){
-		musicFolderPath = pathOfMusicFolder;
-		numberOfSongs = findNumberOfSongs();
+		this.musicFolderPath = pathOfMusicFolder;
+		this.numberOfSongs = findNumberOfSongs();
 	}
 	
 	public int getNumberOfSongs() {
@@ -58,19 +58,19 @@ public class Song {
 	}
 	
 	public int findNumberOfSongs() {
-		File folder = new File(musicFolderPath);
-		File []listOfFiles = folder.listFiles();
-		numberOfSongs = listOfFiles.length;
-		return numberOfSongs;
+		var folder = new File(this.musicFolderPath);
+		var listOfFiles = folder.listFiles();
+		this.numberOfSongs = listOfFiles.length;
+		return this.numberOfSongs;
 	}
 	
 	public void play() throws NoPlayerException, IOException {
-		MediaLocator ml = new MediaLocator(songToPlay.toURL());
-		p = Manager.createPlayer(ml);
-		p.start();
+		var ml = new MediaLocator(songToPlay.toURL());
+		this.player = Manager.createPlayer(ml);
+		this.player.start();
 	}
 	
 	public void stop() {
-		p.stop();
+		player.stop();
 	}
 }
