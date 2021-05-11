@@ -1,15 +1,10 @@
-/**
- * @author ABS Lead Software Dev, Christopher Bell
- */
-
-package edu.xula.www.bellplayer99;
-
-import java.io.*;
+package dev.christopherbell.azuplayer.models;
 
 import javax.media.Manager;
 import javax.media.MediaLocator;
 import javax.media.NoPlayerException;
 import javax.media.Player;
+import java.io.File;
 
 public class Song {
 	String musicFolderPath;
@@ -39,7 +34,7 @@ public class Song {
 	public void setSongPath(String newSongPath) {
 		songPath = musicFolderPath;
 		songPath = songPath + "/" + newSongPath;
-		songToPlay = new File(songPath);	
+		songToPlay = new File(songPath);
 	}
 	
 	public void listAllFiles(){

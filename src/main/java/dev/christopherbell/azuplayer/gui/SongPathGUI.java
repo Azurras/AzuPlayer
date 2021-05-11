@@ -1,13 +1,7 @@
-/**
- * @author ABS Lead Software Dev, Christopher Bell
- */
+package dev.christopherbell.azuplayer.gui;
 
-package edu.xula.www.bellplayer99;
-
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.*;
 

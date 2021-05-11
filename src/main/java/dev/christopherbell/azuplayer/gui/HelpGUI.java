@@ -1,13 +1,9 @@
-/**
- * @author ABS Lead Software Dev, Christopher Bell
- */
+package dev.christopherbell.azuplayer.gui;
 
-
-package edu.xula.www.bellplayer99;
-
-import javax.swing.*;
-
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class HelpGUI {
 	JFrame frame;
