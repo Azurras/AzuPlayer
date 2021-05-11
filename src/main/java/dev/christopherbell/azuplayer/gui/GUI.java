@@ -1,11 +1,17 @@
 package dev.christopherbell.azuplayer.gui;
 
 import dev.christopherbell.azuplayer.models.Song;
-
 import javax.media.NoPlayerException;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -132,15 +138,13 @@ public class GUI {
             song.setSongPath(selectedObject);
 
             try {
-                System.out.println(song.songPath);
+                System.out.println(song.getSongPath());
                 if (isSongPlaying == false) {
                     song.play();
                     isSongPlaying = true;
                 }
-            } catch (NoPlayerException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (NoPlayerException | IOException ex) {
+                ex.printStackTrace();
             }
         }
     }

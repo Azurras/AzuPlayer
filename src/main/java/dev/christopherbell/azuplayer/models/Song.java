@@ -5,6 +5,8 @@ import javax.media.MediaLocator;
 import javax.media.NoPlayerException;
 import javax.media.Player;
 import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Song {
 	String musicFolderPath;
@@ -43,11 +45,11 @@ public class Song {
 
 		File folder = new File(path);
 		
-		File []listOfFiles = folder.listFiles(); 
+		File []listOfFiles = folder.listFiles();
 
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				files = listOfFiles[i].getName();
+		for (File listOfFile : Objects.requireNonNull(listOfFiles)) {
+			if (listOfFile.isFile()) {
+				files = listOfFile.getName();
 				if (files.endsWith(".wav") || files.endsWith(".WAV")) {
 					System.out.println(files);
 				}
@@ -62,7 +64,7 @@ public class Song {
 		return numberOfSongs;
 	}
 	
-	public void play() throws NoPlayerException, IOException{
+	public void play() throws NoPlayerException, IOException {
 		MediaLocator ml = new MediaLocator(songToPlay.toURL());
 		p = Manager.createPlayer(ml);
 		p.start();
