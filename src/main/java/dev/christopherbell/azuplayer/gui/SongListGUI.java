@@ -16,14 +16,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
-public class GUI {
+public class SongListGUI {
     private final DefaultTableModel mTableSong;
     private final JTable tableSong;
     private final Song song;
     private boolean isSongPlaying;
 
-    public GUI(String pathOfMusicFolder) {
+    public SongListGUI(String pathOfMusicFolder) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
@@ -80,7 +81,6 @@ public class GUI {
 
         play.addActionListener(new buttonPlay());
         pause.addActionListener(new buttonStop());
-
     }
 
     public void setUpTable() {
@@ -100,22 +100,15 @@ public class GUI {
     }
 
     public void populateTable() {
-
-        String path = song.getMusicFolderPath();
-        String files;
-        File folder = new File(path);
-        File[] listOfFiles = folder.listFiles();
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                files = listOfFiles[i].getName();
-                if (files.endsWith(".wav") || files.endsWith(".WAV")) {
-                    System.out.println(files);
-                    //String[] songs = files.split(".");
-                    if (files != null) {
-                        mTableSong.setValueAt(files, i, 0);
-                    }
-                }
+        File folder = new File(song.getMusicFolderPath());
+        int i = 0;
+        var filesList = Objects.requireNonNullElse(folder.listFiles(), new File[1]);
+        for (File item: filesList) {
+            if (Objects.nonNull(item) && item.isFile()) {
+                var songFile = Objects.requireNonNullElse(item.getName(), "");
+                System.out.println(songFile);
+                mTableSong.setValueAt(songFile, i, 0);
+                i++;
             }
         }
     }
@@ -125,11 +118,11 @@ public class GUI {
             int selectedRowIndex = tableSong.getSelectedRow();
             int selectedColumnIndex = tableSong.getSelectedColumn();
             String selectedObject = (String) tableSong.getModel().getValueAt(selectedRowIndex, selectedColumnIndex);
-            song.setSongPath(selectedObject);
+            song.setCurrentSongPath(selectedObject);
 
             try {
-                System.out.println(song.getSongPath());
-                if (isSongPlaying == false) {
+                System.out.println(song.getCurrentSongPath());
+                if (!isSongPlaying) {
                     song.play();
                     isSongPlaying = true;
                 }
@@ -145,7 +138,7 @@ public class GUI {
                 song.stop();
                 isSongPlaying = false;
             }
-            System.out.println(song.getSongPath());
+            System.out.println(song.getCurrentSongPath());
         }
     }
 }

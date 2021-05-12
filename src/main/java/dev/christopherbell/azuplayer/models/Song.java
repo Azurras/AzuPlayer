@@ -6,21 +6,34 @@ import javax.media.NoPlayerException;
 import javax.media.Player;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Song {
 	private final String musicFolderPath;
-	private String songPath;
+	private String currentSongPath;
 	private int numberOfSongs;
 	private File songToPlay;
-	private File[] listOfFiles;
+	private List<File> files;
 	private Player player;
 	
 	public Song(String pathOfMusicFolder){
 		this.musicFolderPath = pathOfMusicFolder;
-		this.numberOfSongs = findNumberOfSongs();
+		this.numberOfSongs = getTotalSongCount();
+		this.songToPlay = new File("");
+		this.files = new ArrayList<>();
 	}
-	
+
+	public File getSongToPlay() {
+		return songToPlay;
+	}
+
+	public List<File> getFiles() {
+		return files;
+	}
+
 	public int getNumberOfSongs() {
 		return numberOfSongs;
 	}
@@ -29,18 +42,18 @@ public class Song {
 		return musicFolderPath;
 	}
 	
-	public String getSongPath() {
-		return songPath;
+	public String getCurrentSongPath() {
+		return currentSongPath;
 	}
 	
-	public void setSongPath(String newSongPath) {
-		songPath = musicFolderPath;
-		songPath = songPath + "/" + newSongPath;
-		songToPlay = new File(songPath);
+	public void setCurrentSongPath(String newSongPath) {
+		currentSongPath = musicFolderPath;
+		currentSongPath = currentSongPath + "/" + newSongPath;
+		songToPlay = new File(currentSongPath);
 	}
 	
 	public void listAllFiles(){
-		String path = songPath;
+		String path = currentSongPath;
 		String files;
 
 		File folder = new File(path);
@@ -56,11 +69,11 @@ public class Song {
 			}
 		}
 	}
-	
-	public int findNumberOfSongs() {
+
+	public int getTotalSongCount() {
 		var folder = new File(this.musicFolderPath);
-		var listOfFiles = folder.listFiles();
-		this.numberOfSongs = listOfFiles.length;
+		var songList = Arrays.asList(folder.listFiles());
+		this.numberOfSongs = songList.size();
 		return this.numberOfSongs;
 	}
 	
