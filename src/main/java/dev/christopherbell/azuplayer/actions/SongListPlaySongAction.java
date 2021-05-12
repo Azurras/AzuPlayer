@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class SongListPlaySongAction extends MainAction implements ActionListener {
-
-
     public SongListPlaySongAction(JTable newSongTable) {
         songTable = newSongTable;
     }
