@@ -12,18 +12,54 @@ import java.util.List;
 import java.util.Objects;
 
 public class Song {
-	private final String musicFolderPath;
+	private String artist;
+	private String duration;
+	private String location;
+	private String name;
+	private int plays;
+
+	// Weird properties
+	private  String musicFolderPath;
 	private String currentSongPath;
 	private int numberOfSongs;
 	private File songToPlay;
 	private List<File> files;
 	private Player player;
-	
+
+	public Song(String artist, String duration, String location, String name, int plays) {
+		this.artist = artist;
+		this.duration = duration;
+		this.location = location;
+		this.name = name;
+		this.plays = plays;
+	}
+
+	// weird constructor
 	public Song(String pathOfMusicFolder){
 		this.musicFolderPath = pathOfMusicFolder;
 		this.numberOfSongs = getTotalSongCount();
 		this.songToPlay = new File("");
 		this.files = new ArrayList<>();
+	}
+
+	public String getArtist() {
+		return artist;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPlays() {
+		return plays;
 	}
 
 	public File getSongToPlay() {
