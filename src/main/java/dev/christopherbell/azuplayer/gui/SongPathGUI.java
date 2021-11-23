@@ -16,6 +16,7 @@ public class SongPathGUI {
         var submitButton = initializeSubmitButton(musicFolderPathTextField);
         var panel = initializeMainPanel(requestPathLabel, musicFolderPathTextField, submitButton);
         frame.add(panel);
+        frame.setVisible(true);
     }
 
     private JLabel createNewLabel() {
@@ -50,7 +51,6 @@ public class SongPathGUI {
         var frame = new JFrame();
         frame.setTitle("AzuPlayer");
         frame.setSize(250, 200);
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.getContentPane();
