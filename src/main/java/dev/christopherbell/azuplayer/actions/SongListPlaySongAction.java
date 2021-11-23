@@ -1,5 +1,8 @@
 package dev.christopherbell.azuplayer.actions;
 
+import dev.christopherbell.azuplayer.services.AzuPlayerService;
+
+import javax.media.CannotRealizeException;
 import javax.media.NoPlayerException;
 import javax.swing.JTable;
 import java.awt.event.ActionEvent;
@@ -16,14 +19,14 @@ public class SongListPlaySongAction extends MainAction implements ActionListener
         var selectedRowIndex = songTable.getSelectedRow();
         var selectedColumnIndex = songTable.getSelectedColumn();
         var selectedObject = (String) songTable.getModel().getValueAt(selectedRowIndex, selectedColumnIndex);
-        currentSong.setCurrentSongPath(selectedObject);
+        AzuPlayerService.currentSong.setCurrentSongPath(selectedObject);
         try {
-            System.out.println(currentSong.getCurrentSongPath());
-            if (!isSongPlaying) {
-                currentSong.play();
-                isSongPlaying = true;
+            System.out.println(AzuPlayerService.currentSong.getCurrentSongPath());
+            if (!AzuPlayerService.isSongPlaying) {
+                AzuPlayerService.currentSong.play();
+                AzuPlayerService.isSongPlaying = true;
             }
-        } catch (NoPlayerException | IOException ex) {
+        } catch (NoPlayerException | IOException | CannotRealizeException ex) {
             ex.printStackTrace();
         }
     }

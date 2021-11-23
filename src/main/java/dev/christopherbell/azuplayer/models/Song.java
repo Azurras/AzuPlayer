@@ -1,9 +1,12 @@
 package dev.christopherbell.azuplayer.models;
 
-import javax.media.Manager;
-import javax.media.MediaLocator;
-import javax.media.NoPlayerException;
-import javax.media.Player;
+import dev.christopherbell.azuplayer.services.AzuPlayerService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.media.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Song {
 	private String artist;
 	private String duration;
@@ -83,9 +90,7 @@ public class Song {
 	}
 	
 	public void setCurrentSongPath(String newSongPath) {
-		currentSongPath = musicFolderPath;
-		currentSongPath = currentSongPath + "/" + newSongPath;
-		songToPlay = new File(currentSongPath);
+		songToPlay = new File(newSongPath);
 	}
 	
 	public void listAllFiles(){
@@ -113,10 +118,10 @@ public class Song {
 		return this.numberOfSongs;
 	}
 	
-	public void play() throws NoPlayerException, IOException {
-		var ml = new MediaLocator(songToPlay.toURL());
-		this.player = Manager.createPlayer(ml);
-		this.player.start();
+	public void play() throws NoPlayerException, IOException, CannotRealizeException {
+		var ml = new MediaLocator(String.valueOf(AzuPlayerService.musicCollection.getLocation() + "/" + songToPlay));
+		final Player mediaplayer = Manager.createRealizedPlayer(ml);
+		mediaplayer.start();
 	}
 	
 	public void stop() {

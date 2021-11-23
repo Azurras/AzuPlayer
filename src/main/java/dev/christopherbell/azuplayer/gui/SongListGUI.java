@@ -4,6 +4,7 @@ import dev.christopherbell.azuplayer.actions.MainAction;
 import dev.christopherbell.azuplayer.actions.SongListPlaySongAction;
 import dev.christopherbell.azuplayer.actions.SongListStopSongAction;
 import dev.christopherbell.azuplayer.configs.Constants;
+import dev.christopherbell.azuplayer.services.AzuPlayerService;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -87,16 +88,15 @@ public class SongListGUI {
         tableSong.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableSong.setRowHeight(25);
         mTableSong.setColumnCount(1);
-        mTableSong.setRowCount(MainAction.currentSong.getNumberOfSongs());
+        mTableSong.setRowCount(25);
     }
 
     public void populateTable() {
-        File folder = new File(MainAction.currentSong.getMusicFolderPath());
-        int i = 0;
-        var filesList = Objects.requireNonNullElse(folder.listFiles(), new File[1]);
-        for (File item : filesList) {
-            if (Objects.nonNull(item) && item.isFile()) {
-                var songFile = Objects.requireNonNullElse(item.getName(), "");
+        var i = 0;
+        var songList = AzuPlayerService.getSongFiles();
+        for (File song : songList) {
+            if (Objects.nonNull(song) && song.isFile()) {
+                var songFile = Objects.requireNonNullElse(song.getName(), "");
                 System.out.println(songFile);
                 mTableSong.setValueAt(songFile, i, 0);
                 i++;
