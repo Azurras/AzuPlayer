@@ -1,8 +1,7 @@
 package dev.christopherbell.azuplayer.gui;
 
-import dev.christopherbell.azuplayer.actions.MainAction;
-import dev.christopherbell.azuplayer.actions.SongListPlaySongAction;
-import dev.christopherbell.azuplayer.actions.SongListStopSongAction;
+import dev.christopherbell.azuplayer.actions.PlaySongAction;
+import dev.christopherbell.azuplayer.actions.StopSongAction;
 import dev.christopherbell.azuplayer.configs.Constants;
 import dev.christopherbell.azuplayer.services.AzuPlayerService;
 
@@ -18,11 +17,11 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.util.Objects;
 
-public class SongListGUI {
+public class MusicCollectionGui {
     private final DefaultTableModel mTableSong;
     private final JTable tableSong;
 
-    public SongListGUI(String pathOfMusicFolder) {
+    public MusicCollectionGui() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
@@ -40,12 +39,12 @@ public class SongListGUI {
         var play = new JButton("Play");
         play.setBounds(10, 20, 130, 70);
         play.setEnabled(true);
-        play.addActionListener(new SongListPlaySongAction(tableSong));
+        play.addActionListener(new PlaySongAction(tableSong));
 
         var pause = new JButton("Pause");
         pause.setBounds(10, 100, 130, 70);
         pause.setEnabled(true);
-        pause.addActionListener(new SongListStopSongAction());
+        pause.addActionListener(new StopSongAction());
 
         var panelButtonArea = new JPanel(null);
         panelButtonArea.setBounds(600, 0, 250, 600);

@@ -1,6 +1,6 @@
 package dev.christopherbell.azuplayer.gui;
 
-import dev.christopherbell.azuplayer.actions.SongPathGuiSubmitAction;
+import dev.christopherbell.azuplayer.actions.SubmitMusicCollectionAction;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,8 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SongPathGUI {
-    public SongPathGUI() {
+public class SelectMusicCollectionGui {
+
+    public SelectMusicCollectionGui() {
         var frame = createMainFrame();
         var requestPathLabel = createNewLabel();
         var musicFolderPathTextField = createNewTextField();
@@ -43,7 +44,7 @@ public class SongPathGUI {
     private JButton initializeSubmitButton(JTextField musicFolderPathTextField) {
         var submitButton = new JButton("Submit");
         submitButton.setBounds(70, 120, 100, 50);
-        submitButton.addActionListener(new SongPathGuiSubmitAction(musicFolderPathTextField));
+        submitButton.addActionListener(new SubmitMusicCollectionAction(musicFolderPathTextField));
         return submitButton;
     }
 
