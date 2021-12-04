@@ -6,6 +6,7 @@ import dev.christopherbell.azuplayer.services.AzuPlayerService;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,15 +14,18 @@ public class SubmitMusicCollectionAction extends MainAction implements ActionLis
     private final static Logger LOG = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public SubmitMusicCollectionAction(JTextField musicCollectionPathTextField) {
-        LOG.info("SubmitMusicCollectionAction started.");
         musicCollectionLocationTextField = musicCollectionPathTextField;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        var musicCollectionPath = musicCollectionLocationTextField.getText();
-        AzuPlayerService.musicCollection.setLocation(musicCollectionPath);
-        LOG.log(Level.INFO, "LOGGER: Music Collection Location: " + musicCollectionPath);
-        new MusicCollectionGui();
+        if (Objects.nonNull(musicCollectionLocationTextField.getText())) {
+            var musicCollectionPath = musicCollectionLocationTextField.getText();
+            AzuPlayerService.musicCollection.setLocation(musicCollectionPath);
+            LOG.log(Level.INFO, "LOGGER: Music Collection Location: " + musicCollectionPath);
+            new MusicCollectionGui();
+        } else {
+            LOG.log(Level.WARNING, "Error: musicCollectionLocationTextField gave a null result back.");
+        }
     }
 }
